@@ -1,0 +1,28 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const FollowButton = ({ userId, isFollowing }) => {
+  const [following, setFollowing] = useState(isFollowing);
+
+  const handleFollowToggle = async () => {
+    try {
+      const endpoint = following ? 'unfollow' : 'follow';
+      await axios.post(`/api/users/${userId}/${endpoint}`);
+      setFollowing(!following);
+    } catch (error) {
+      console.error('Follow/unfollow failed:', error.response.data);
+    }
+  };
+
+  useEffect(() => {
+    setFollowing(isFollowing);
+  }, [isFollowing]);
+
+  return (
+    <button onClick={handleFollowToggle}>
+      {following ? 'Unfollow' : 'Follow'}
+    </button>
+  );
+};
+
+export default FollowButton;
