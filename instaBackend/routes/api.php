@@ -7,6 +7,9 @@ use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\FollowController;
 use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\LikeController;
+use App\Http\Controllers\API\SearchController;
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -24,4 +27,6 @@ Route::post('/login', [LoginController::class, 'login']);
     Route::post('/posts', [PostController::class, 'create']);
     Route::get('/posts', [PostController::class, 'index']);
     Route::delete('/posts/{post}', [PostController::class, 'delete']);
+    Route::get('/search', [SearchController::class, 'search']);
+
 // });
